@@ -69,6 +69,18 @@
                     name="password"
                 />
             </div>
+            <div class="mb-3">
+                <label for="nomor_telepon" class="form-label"
+                    >Nomor Telepon</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nomor_telepon"
+                    name="nomor_telepon"
+                    value="{{ $data->nomor_telepon }}"
+                />
+            </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary" value="Ubah" />
             </div>

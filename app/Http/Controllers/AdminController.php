@@ -15,15 +15,23 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['id_admin' => 'required', 'nama_admin' => 'required', 'alamat' => 'required', 'username' => 'required', 'password' => 'required',]);
+        $request->validate([
+            'id_admin' => 'required',
+            'nama_admin' => 'required',
+            'alamat' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'nomor_telepon' => 'required|numeric',
+        ]);
         DB::insert(
-            'INSERT INTO admin(id_admin,nama_admin, alamat, username, password) VALUES (:id_admin, :nama_admin, :alamat, :username, :password)',
+            'INSERT INTO admin(id_admin,nama_admin, alamat, username, password, nomor_telepon) VALUES (:id_admin, :nama_admin, :alamat, :username, :password, :nomor_telepon)',
             [
                 'id_admin' => $request->id_admin,
                 'nama_admin' => $request->nama_admin,
                 'alamat' => $request->alamat,
                 'username' => $request->username,
                 'password' => $request->password,
+                'nomor_telepon' => $request->nomor_telepon,
             ]
         );
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil disimpan');
@@ -32,9 +40,11 @@ class AdminController extends Controller
     // public function show all values from a table
     public function index()
     {
-        $datas = DB::select('select * from admin WHERE deleted_at IS NULL');
+        $datas = DB::select('select * from admin WHERE deleted_at IS NULL ORDER BY id_admin ASC');
         // $datas = Admin::all();
-        // $datas = Admin::whereNull('deleted_at')->get();
+        // $datas = Admin::whereNull('deleted_at')->->orderBy('nama_admin', 'asc')->get();
+        // $datas = Admin::onlyTrashed()->get(); // Mengambil data yang sudah dihapus
+        // $datas = Admin::withTrashed()->get(); // Mengambil semua data (termasuk yang sudah dihapus)
         return view('admin.index')->with('datas', $datas);
     }
 
@@ -54,11 +64,12 @@ class AdminController extends Controller
             'alamat' => 'required',
             'username' => 'required',
             'password' => 'required',
+            'nomor_telepon' => 'required|numeric',
         ]);
         DB::update(
             'UPDATE admin SET id_admin = :id_admin, nama_admin =
     :nama_admin, alamat = :alamat, username = :username, password =
-    :password WHERE id_admin = :id',
+    :password, nomor_telepon = :nomor_telepon WHERE id_admin = :id',
             [
                 'id' => $id,
                 'id_admin' => $request->id_admin,
@@ -66,6 +77,7 @@ class AdminController extends Controller
                 'alamat' => $request->alamat,
                 'username' => $request->username,
                 'password' => $request->password,
+                'nomor_telepon' => $request->nomor_telepon,
             ]
         );
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil diubah');

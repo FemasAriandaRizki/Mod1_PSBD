@@ -18,6 +18,7 @@
             <th>Nama</th>
             <th>Alamat</th>
             <th>Username</th>
+            <th>Nomor Telepon</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -28,6 +29,7 @@
             <td>{{ $data->nama_admin }}</td>
             <td>{{ $data->alamat }}</td>
             <td>{{ $data->username }}</td>
+            <td>{{ $data->nomor_telepon }}</td>
             <td>
                 <a
                     href="{{ route('admin.edit', $data->id_admin) }}"
