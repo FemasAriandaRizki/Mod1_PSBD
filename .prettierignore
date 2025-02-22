@@ -1,0 +1,43 @@
+# Folder Laravel yang tidak perlu diformat
+node_modules/
+vendor/
+storage/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+storage/logs/
+bootstrap/cache/
+public/
+dist/
+
+# File yang tidak perlu diformat
+*.min.js
+*.min.css
+*.map
+*.svg
+*.png
+*.jpg
+*.gif
+*.ico
+*.log
+*.cache
+.phpunit.result.cache
+
+# File konfigurasi dan lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+composer.lock
+composer.phar
+autoload.php
+.env
+.env.example
+.env.testing
+
+# Eksklusi file konfigurasi Prettier dan lainnya
+.prettierignore
+.eslintignore
+.stylelintignore
+.gitignore
+.editorconfig
+.gitattributes
