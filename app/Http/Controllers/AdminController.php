@@ -38,14 +38,27 @@ class AdminController extends Controller
     }
 
     // public function show all values from a table
-    public function index()
+    // public function index()
+    // {
+    //     $datas = DB::select('select * from admin WHERE deleted_at IS NULL ORDER BY id_admin ASC');
+    //     // $datas = Admin::all();
+    //     // $datas = Admin::whereNull('deleted_at')->orderBy('nama_admin', 'asc')->get();
+    //     // $datas = Admin::onlyTrashed()->get(); // Mengambil data yang sudah dihapus
+    //     // $datas = Admin::withTrashed()->get(); // Mengambil semua data (termasuk yang sudah dihapus)
+    //     return view('admin.index')->with('datas', $datas);
+    // }
+
+    public function index(Request $request)
     {
-        $datas = DB::select('select * from admin WHERE deleted_at IS NULL ORDER BY id_admin ASC');
-        // $datas = Admin::all();
-        // $datas = Admin::whereNull('deleted_at')->->orderBy('nama_admin', 'asc')->get();
-        // $datas = Admin::onlyTrashed()->get(); // Mengambil data yang sudah dihapus
-        // $datas = Admin::withTrashed()->get(); // Mengambil semua data (termasuk yang sudah dihapus)
-        return view('admin.index')->with('datas', $datas);
+        $query = DB::table('admin')->whereNull('deleted_at');
+
+        if ($request->has('search')) {
+            $query->where('nama_admin', 'like', '%' . $request->search . '%');
+        }
+
+        $datas = $query->orderBy('id_admin', 'ASC')->get();
+
+        return view('admin.index', compact('datas'));
     }
 
     // public function edit a row from a table

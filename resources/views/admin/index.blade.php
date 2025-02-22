@@ -1,11 +1,31 @@
 @extends('admin.layout') @section('content')
 <h4 class="mt-5">Data Admin</h4>
-<a
+<!-- <a
     href="{{ route('admin.create') }}"
     type="button"
     class="btn btn-success rounded-3"
     >Tambah Data</a
->
+> -->
+<div class="d-flex justify-content-between align-items-center">
+    <a
+        href="{{ route('admin.create') }}"
+        type="button"
+        class="btn btn-success rounded-3"
+        >Tambah Data</a
+    >
+
+    <!-- Form Pencarian -->
+    <form action="{{ route('admin.index') }}" method="GET" class="d-flex">
+        <input
+            type="text"
+            name="search"
+            class="form-control me-2"
+            placeholder="Cari username..."
+            value="{{ request('search') }}"
+        />
+        <button type="submit" class="btn btn-primary">Cari</button>
+    </form>
+</div>
 @if ($message = Session::get('success'))
 <div class="alert alert-success mt-3" role="alert">
     {{ $message }}
