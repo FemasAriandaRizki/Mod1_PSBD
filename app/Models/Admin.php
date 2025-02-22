@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Admin extends Model
 {
+    use SoftDeletes;
+    protected $fillable = ['id_admin', 'nama_admin', 'alamat', 'username', 'password'];
+    protected $dates = ['deleted_at']; // Menentukan bahwa kolom ini adalah tipe tanggal
     /**
      * The table associated with the model.
      *

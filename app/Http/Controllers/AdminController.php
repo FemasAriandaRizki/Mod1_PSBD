@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -31,7 +32,9 @@ class AdminController extends Controller
     // public function show all values from a table
     public function index()
     {
-        $datas = DB::select('select * from admin');
+        $datas = DB::select('select * from admin WHERE deleted_at IS NULL');
+        // $datas = Admin::all();
+        // $datas = Admin::whereNull('deleted_at')->get();
         return view('admin.index')->with('datas', $datas);
     }
 
@@ -70,7 +73,8 @@ class AdminController extends Controller
 
     public function delete($id)
     {
-        DB::delete('DELETE FROM admin WHERE id_admin = :id_admin', ['id_admin' => $id]);
+        // DB::delete('DELETE FROM admin WHERE id_admin = :id_admin', ['id_admin' => $id]);
+        Admin::where('id_admin', $id)->delete(); // Soft delete: hanya mengisi kolom deleted_at
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil dihapus');
     }
 }
