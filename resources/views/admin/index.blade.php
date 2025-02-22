@@ -49,7 +49,7 @@
             <td>{{ $data->nama_admin }}</td>
             <td>{{ $data->alamat }}</td>
             <td>{{ $data->username }}</td>
-            <td>{{ $data->nomor_telepon }}</td>
+            <td>{{ $data->nomor_telepon ? 'Punya' : 'Tidak Punya' }}</td>
             <td>
                 <a
                     href="{{ route('admin.edit', $data->id_admin) }}"

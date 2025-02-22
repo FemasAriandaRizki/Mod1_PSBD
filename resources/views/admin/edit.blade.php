@@ -73,13 +73,18 @@
                 <label for="nomor_telepon" class="form-label"
                     >Nomor Telepon</label
                 >
-                <input
-                    type="text"
+                <select
                     class="form-control"
                     id="nomor_telepon"
                     name="nomor_telepon"
-                    value="{{ $data->nomor_telepon }}"
-                />
+                >
+                    <option value="1" {{ $data->
+                        nomor_telepon == 1 ? 'selected' : '' }}>Punya
+                    </option>
+                    <option value="0" {{ $data->
+                        nomor_telepon == 0 ? 'selected' : '' }}>Tidak Punya
+                    </option>
+                </select>
             </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary" value="Ubah" />

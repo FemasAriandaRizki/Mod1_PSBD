@@ -20,9 +20,12 @@ class AdminController extends Controller
             'nama_admin' => 'required',
             'alamat' => 'required',
             'username' => 'required',
-            'password' => 'required',
-            'nomor_telepon' => 'required|numeric',
+            'nomor_telepon' => 'required|in:0,1',
         ]);
+
+        // Gunakan '123' jika password tidak diisi
+        $password = $request->password ? $request->password : '123';
+
         DB::insert(
             'INSERT INTO admin(id_admin,nama_admin, alamat, username, password, nomor_telepon) VALUES (:id_admin, :nama_admin, :alamat, :username, :password, :nomor_telepon)',
             [
@@ -30,7 +33,7 @@ class AdminController extends Controller
                 'nama_admin' => $request->nama_admin,
                 'alamat' => $request->alamat,
                 'username' => $request->username,
-                'password' => $request->password,
+                'password' => $password,
                 'nomor_telepon' => $request->nomor_telepon,
             ]
         );
@@ -76,9 +79,13 @@ class AdminController extends Controller
             'nama_admin' => 'required',
             'alamat' => 'required',
             'username' => 'required',
-            'password' => 'required',
             'nomor_telepon' => 'required|numeric',
         ]);
+
+        // Ambil password lama jika tidak diisi
+        $admin = DB::table('admin')->where('id_admin', $id)->first();
+        $password = $request->password ? $request->password : ($admin->password ?? '123');
+
         DB::update(
             'UPDATE admin SET id_admin = :id_admin, nama_admin =
     :nama_admin, alamat = :alamat, username = :username, password =
@@ -89,7 +96,7 @@ class AdminController extends Controller
                 'nama_admin' => $request->nama_admin,
                 'alamat' => $request->alamat,
                 'username' => $request->username,
-                'password' => $request->password,
+                'password' => $password,
                 'nomor_telepon' => $request->nomor_telepon,
             ]
         );

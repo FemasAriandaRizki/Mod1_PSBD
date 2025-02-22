@@ -49,22 +49,38 @@
                 />
             </div>
             <div class="mb-3">
-                <label for="password" class="form- label">Password</label>
+                <!-- <label for="password" class="form- label">Password</label>
                 <input
                     type="password"
                     class="form-control"
                     id="password"
                     name="password"
-                />
+                /> -->
+                <div class="mb-3">
+                    <label for="password" class="form-label"
+                        >Password (Opsional)</label
+                    >
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Isi jika ingin mengganti password"
+                    />
+                </div>
             </div>
             <div class="mb-3">
-                <label for="nomor_telepon" class="form- label">Nomor Telepon</label>
-                <input
-                    type="text"
+                <label for="nomor_telepon" class="form- label"
+                    >Nomor Telepon</label
+                >
+                <select
                     class="form-control"
                     id="nomor_telepon"
                     name="nomor_telepon"
-                />
+                >
+                    <option value="1">Punya</option>
+                    <option value="0">Tidak Punya</option>
+                </select>
             </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary" value="Tambah" />
