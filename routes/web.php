@@ -18,3 +18,8 @@ Route::get('edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
 Route::post('update/{id}', [AdminController::class, 'update'])->name('admin.update');
 
 Route::post('delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
+
+Route::get('trash', [AdminController::class, 'trash'])->name('admin.trash');
+Route::post('restore/{id}', [AdminController::class, 'restore'])->name('admin.restore');
+Route::post('force-delete/{id}', [AdminController::class, 'forceDelete'])->name('admin.forceDelete');
+

@@ -109,4 +109,22 @@ class AdminController extends Controller
         Admin::where('id_admin', $id)->delete(); // Soft delete: hanya mengisi kolom deleted_at
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil dihapus');
     }
+
+    public function trash()
+    {
+        $datas = Admin::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        return view('admin.trash', compact('datas'));
+    }
+
+    public function restore($id)
+    {
+        Admin::onlyTrashed()->where('id_admin', $id)->restore();
+        return redirect()->route('admin.trash')->with('success', 'Data berhasil dikembalikan');
+    }
+
+    public function forceDelete($id)
+    {
+        Admin::onlyTrashed()->where('id_admin', $id)->forceDelete();
+        return redirect()->route('admin.trash')->with('success', 'Data berhasil dihapus permanen');
+    }
 }
