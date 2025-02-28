@@ -1,11 +1,6 @@
 @extends('admin.layout') @section('content')
-<h4 class="mt-5">Data Admin</h4>
-<!-- <a
-    href="{{ route('admin.create') }}"
-    type="button"
-    class="btn btn-success rounded-3"
-    >Tambah Data</a
-> -->
+<h4 class="mt-5 mb-3">Data Admin</h4>
+
 <div class="d-flex justify-content-between align-items-center">
     <a
         href="{{ route('admin.create') }}"
@@ -31,14 +26,13 @@
     {{ $message }}
 </div>
 @endif
-<table class="table table-hover mt-2">
+<table class="table table-hover mt-3">
     <thead>
         <tr>
             <th>No.</th>
             <th>Nama</th>
             <th>Alamat</th>
             <th>Username</th>
-            <th>Nomor Telepon</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -49,7 +43,6 @@
             <td>{{ $data->nama_admin }}</td>
             <td>{{ $data->alamat }}</td>
             <td>{{ $data->username }}</td>
-            <td>{{ $data->nomor_telepon ? 'Punya' : 'Tidak Punya' }}</td>
             <td>
                 <a
                     href="{{ route('admin.edit', $data->id_admin) }}"

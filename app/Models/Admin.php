@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Admin extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['id_admin', 'nama_admin', 'alamat', 'username', 'password', 'nomor_telepon'];
+    protected $fillable = ['id_admin', 'nama_admin', 'alamat', 'username', 'password'];
     protected $dates = ['deleted_at']; // Menentukan bahwa kolom ini adalah tipe tanggal
     /**
      * The table associated with the model.

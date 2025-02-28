@@ -20,21 +20,19 @@ class AdminController extends Controller
             'nama_admin' => 'required',
             'alamat' => 'required',
             'username' => 'required',
-            'nomor_telepon' => 'required|in:0,1',
         ]);
 
         // Gunakan '123' jika password tidak diisi
         $password = $request->password ? $request->password : '123';
 
         DB::insert(
-            'INSERT INTO admin(id_admin,nama_admin, alamat, username, password, nomor_telepon) VALUES (:id_admin, :nama_admin, :alamat, :username, :password, :nomor_telepon)',
+            'INSERT INTO admin(id_admin,nama_admin, alamat, username, password) VALUES (:id_admin, :nama_admin, :alamat, :username, :password)',
             [
                 'id_admin' => $request->id_admin,
                 'nama_admin' => $request->nama_admin,
                 'alamat' => $request->alamat,
                 'username' => $request->username,
                 'password' => $password,
-                'nomor_telepon' => $request->nomor_telepon,
             ]
         );
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil disimpan');
@@ -79,7 +77,6 @@ class AdminController extends Controller
             'nama_admin' => 'required',
             'alamat' => 'required',
             'username' => 'required',
-            'nomor_telepon' => 'required|numeric',
         ]);
 
         // Ambil password lama jika tidak diisi
@@ -89,7 +86,7 @@ class AdminController extends Controller
         DB::update(
             'UPDATE admin SET id_admin = :id_admin, nama_admin =
     :nama_admin, alamat = :alamat, username = :username, password =
-    :password, nomor_telepon = :nomor_telepon WHERE id_admin = :id',
+    :password WHERE id_admin = :id',
             [
                 'id' => $id,
                 'id_admin' => $request->id_admin,
@@ -97,7 +94,6 @@ class AdminController extends Controller
                 'alamat' => $request->alamat,
                 'username' => $request->username,
                 'password' => $password,
-                'nomor_telepon' => $request->nomor_telepon,
             ]
         );
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil diubah');
@@ -126,5 +122,11 @@ class AdminController extends Controller
     {
         Admin::onlyTrashed()->where('id_admin', $id)->forceDelete();
         return redirect()->route('admin.trash')->with('success', 'Data berhasil dihapus permanen');
+    }
+
+    public function restoreAll()
+    {
+        Admin::onlyTrashed()->restore();
+        return redirect()->route('admin.trash')->with('success', 'Semua data berhasil dikembalikan');
     }
 }

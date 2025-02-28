@@ -69,19 +69,6 @@
                     />
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="nomor_telepon" class="form- label"
-                    >Nomor Telepon</label
-                >
-                <select
-                    class="form-control"
-                    id="nomor_telepon"
-                    name="nomor_telepon"
-                >
-                    <option value="1">Punya</option>
-                    <option value="0">Tidak Punya</option>
-                </select>
-            </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary" value="Tambah" />
             </div>
