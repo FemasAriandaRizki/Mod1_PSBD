@@ -108,7 +108,7 @@ class AdminController extends Controller
 
     public function trash()
     {
-        $datas = Admin::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $datas = Admin::onlyTrashed()->orderBy('deleted_at', 'asc')->get();
         return view('admin.trash', compact('datas'));
     }
 
